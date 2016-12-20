@@ -1,4 +1,4 @@
-Front Schedule Search Module
+# Front Schedule Search Module
 
 phpVMS module to create a schedule search system your phpVMS based virtual airline.
 
@@ -15,10 +15,10 @@ www.simpilotgroup.com
 www.david-clark.net
 
 Developed on:
-phpVMS v1.0
-php 5.3.4
+phpVMS simpilot 5.5.2 (https://github.com/DavidJClark/phpvms_5.5.x)
+php 5.6.8
 mysql 5.0.7
-apache 2.2.17
+apache 2.4.23
 
 Module creates a schedule search form that includes the ability to choose the airline, aircraft type, arrival field, and departure field. You can choose one or all of the parameters to find what you are looking for in your schedule database.
 

@@ -5,54 +5,44 @@
 //To view full license text visit http://creativecommons.org/licenses/by-nc-sa/3.0/
 //
 //@author David Clark (simpilot)
-//@copyright Copyright (c) 2009-2012, David Clark
+//@copyright Copyright (c) 2009-2016, David Clark
 //@license http://creativecommons.org/licenses/by-nc-sa/3.0/
 
-class FrontSchedulesData extends CodonData
-{
-    public function findschedules($arricao, $depicao, $airline, $aircraft)   {
-        $query = "SELECT phpvms_schedules.*, phpvms_aircraft.name AS aircraft, phpvms_aircraft.registration
-                FROM phpvms_schedules, phpvms_aircraft
-                WHERE phpvms_schedules.depicao LIKE '$depicao'
-                AND phpvms_schedules.arricao LIKE '$arricao'
-                AND phpvms_schedules.code LIKE '$airline'
-                AND phpvms_schedules.aircraft LIKE '$aircraft'
-                AND phpvms_aircraft.id LIKE '$aircraft'";
-
-        return DB::get_results($query);
+class FrontSchedulesData extends CodonData {
+    public static function findschedules($arricao, $depicao, $airline, $aircraft, $enabled) {
+       	$sql = "SELECT ".TABLE_PREFIX."schedules.*, ".TABLE_PREFIX."aircraft.name AS aircraft, ".TABLE_PREFIX."aircraft.registration
+                FROM ".TABLE_PREFIX."schedules, ".TABLE_PREFIX."aircraft
+                WHERE ".TABLE_PREFIX."schedules.depicao LIKE '$depicao'
+                AND ".TABLE_PREFIX."schedules.arricao LIKE '$arricao'
+                AND ".TABLE_PREFIX."schedules.code LIKE '$airline'
+                AND ".TABLE_PREFIX."schedules.aircraft LIKE '$aircraft'
+                AND ".TABLE_PREFIX."aircraft.id LIKE '$aircraft'";
+	
+		if(isset($enabled) && $enabled == 1) {
+			$sql .= " AND s.enabled = '1'";	
+		}
+		
+        return DB::get_results($sql);
     }
 
-     public function findschedule($arricao, $depicao, $airline)   {
-        $query = "SELECT phpvms_schedules.*, phpvms_aircraft.name AS aircraft, phpvms_aircraft.registration
-                FROM phpvms_schedules, phpvms_aircraft
-                WHERE phpvms_schedules.depicao LIKE '$depicao'
-                AND phpvms_schedules.arricao LIKE '$arricao'
-                AND phpvms_schedules.code LIKE '$airline'
-                AND phpvms_aircraft.id LIKE phpvms_schedules.aircraft";
+     public static function findschedule($arricao, $depicao, $airline, $enabled) {
+        $sql = "SELECT ".TABLE_PREFIX."schedules.*, ".TABLE_PREFIX."aircraft.name AS aircraft, ".TABLE_PREFIX."aircraft.registration
+                FROM ".TABLE_PREFIX."schedules, ".TABLE_PREFIX."aircraft
+                WHERE ".TABLE_PREFIX."schedules.depicao LIKE '$depicao'
+                AND ".TABLE_PREFIX."schedules.arricao LIKE '$arricao'
+                AND ".TABLE_PREFIX."schedules.code LIKE '$airline'
+                AND ".TABLE_PREFIX."aircraft.id LIKE ".TABLE_PREFIX."schedules.aircraft";
 
-        return DB::get_results($query);
+        return DB::get_results($sql);
     }
 
-    public function findaircrafttypes() {
-        $query = "SELECT DISTINCT icao
-                FROM phpvms_aircraft";
-
-        return DB::get_results($query);
+    public static function findaircrafttypes() {
+        $sql = "SELECT DISTINCT icao FROM ".TABLE_PREFIX."aircraft";
+        return DB::get_results($sql);
     }
 
-    public function findaircraft($aircraft) {
-        $query = "SELECT id
-                FROM phpvms_aircraft
-                WHERE icao='$aircraft'";
-
-        return DB::get_results($query);
-    }
-
-    public function findcountries() {
-        $query = "SELECT DISTINCT country
-                FROM phpvms_airports";
-
-        return DB::get_results($query);
-    }
-
+    public static function findaircraft($aircraft) {
+        $sql = "SELECT id FROM ".TABLE_PREFIX."aircraft WHERE icao = '$aircraft'";
+        return DB::get_results($sql);
+	}
 }
