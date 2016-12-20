@@ -19,7 +19,7 @@ class FrontSchedulesData extends CodonData {
                 AND ".TABLE_PREFIX."aircraft.id LIKE '$aircraft'";
 	
 	if(isset($enabled) && $enabled == 1) {
-		$sql .= " AND s.enabled = '1'";	
+		$sql .= " AND ".TABLE_PREFIX."schedules.enabled = '1' ";
 	}
 		
         return DB::get_results($sql);
