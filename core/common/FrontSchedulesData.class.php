@@ -48,5 +48,5 @@ class FrontSchedulesData extends CodonData {
     public static function findaircraft($aircraft) {
         $sql = "SELECT id FROM ".TABLE_PREFIX."aircraft WHERE icao = '$aircraft'";
         return DB::get_results($sql);
-	}
+    }
 }
