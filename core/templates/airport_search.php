@@ -17,9 +17,9 @@
                 <select class="search" name="airline">
                     <option value="">All</option>
                     <?php
-					foreach ($allairlines as $airline) {
-						echo '<option value="'.$airline->code.'">'.$airline->name.'</option>';
-					}
+			foreach ($allairlines as $airline) {
+				echo '<option value="'.$airline->code.'">'.$airline->name.'</option>';
+			}
                     ?>
                 </select>
             </td>
@@ -30,9 +30,9 @@
                 <select class="search" name="aircraft">
                     <option value="">All</option>
                     <?php
-					foreach ($allaircraft as $aircraft) {
-						echo '<option value="'.$aircraft->icao.'">'.$aircraft->icao.'</option>';
-					}
+			foreach ($allaircraft as $aircraft) {
+				echo '<option value="'.$aircraft->icao.'">'.$aircraft->icao.'</option>';
+			}
                     ?>
                 </select>
             </td>
@@ -44,8 +44,8 @@
                     <option value="">All</option>
                     <?php
                         foreach ($allairports as $airport) {
-							echo '<option value="'.$airport->icao.'">'.$airport->icao.' - '.$airport->name.'</option>';
-						}
+				echo '<option value="'.$airport->icao.'">'.$airport->icao.' - '.$airport->name.'</option>';
+			}
                     ?>
                 </select>
             </td>
@@ -56,9 +56,9 @@
                 <select class="search" name="arricao">
                     <option value="">All</option>
                     <?php
-					foreach ($allairports as $airport) {
-						echo '<option value="'.$airport->icao.'">'.$airport->icao.' - '.$airport->name.'</option>';
-					}
+			foreach ($allairports as $airport) {
+				echo '<option value="'.$airport->icao.'">'.$airport->icao.' - '.$airport->name.'</option>';
+			}
                     ?>
                 </select>
             </td>
